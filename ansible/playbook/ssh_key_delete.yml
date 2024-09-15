@@ -1,0 +1,12 @@
+# ansible-playbook -i <self.path_ansible_inventory_all> -i <self.path_ansible_inventory_scope> <self.path_ansible_playbook>/ssh_key_delete.yml
+---
+- name: delete SSH key on remote machine
+  hosts: all
+  gather_facts: False
+  tasks:
+    - name: delete SSH public key on authorized_keys
+      authorized_key:
+        user: ansible
+        state: absent
+        key: "{{ lookup('file', rsa_key_file) }}"
+        

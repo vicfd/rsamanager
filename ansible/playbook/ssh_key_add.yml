@@ -1,0 +1,11 @@
+# ansible-playbook -i <self.path_ansible_inventory_all> -i <self.path_ansible_inventory_scope> <self.path_ansible_playbook>/ssh_key_add.yml
+---
+- name: add SSH key on remote machine
+  hosts: all
+  gather_facts: False
+  tasks:
+    - name: add SSH public key on authorized_keys
+      authorized_key:
+        user: ansible
+        state: present
+        key: "{{ lookup('file', rsa_key_file) }}"

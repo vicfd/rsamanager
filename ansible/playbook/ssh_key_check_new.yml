@@ -1,0 +1,8 @@
+# ansible-playbook -i <self.path_ansible_inventory_all> -i <self.path_ansible_inventory_scope> <self.path_ansible_playbook>/ssh_check_new.yml
+---
+- name: check connectivity
+  hosts: all
+  gather_facts: False
+  tasks:
+    - name: check connectivity
+      ping:
